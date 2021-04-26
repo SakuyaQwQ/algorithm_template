@@ -1,0 +1,41 @@
+#include<vector>
+#include<iostream>
+
+using namespace std;
+
+struct dsu {
+	int size;
+	int* f;
+	dsu(int n) :size(n), f(new int[n + 1]) {
+		for (int i = 0; i < n; ++i) f[i] = i;
+	}
+	int getf(int x) {
+		int temp = x;
+		while (x != f[x]) {
+			f[x] = f[f[x]];
+			x = f[x];
+		}
+		return f[temp] = x;
+	}
+	void merge(int x, int y) {
+		int fx = getf(x);
+		int fy = getf(y);
+		if (fx > fy)swap(fx, fy);
+		f[fy] = fx;
+	}
+};
+
+int main() {
+	int n, m;
+	cin >> n >> m;
+	dsu s(n);
+	for (int i = 0; i < m; ++i) {
+		char op;
+		int a, b;
+		cin >> op >> a >> b;
+		--a;
+		--b;
+		if (op == 'M')s.merge(a, b);
+		else cout << (s.getf(a) == s.getf(b) ? "Yes" : "No" )<< endl;
+	}
+}
