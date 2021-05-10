@@ -8,7 +8,7 @@
 
 using namespace std;
 
-string mul(string x, string y) {
+string mul(string& x, string& y) {
 
 	int* a = new int[x.size() + 1]{ 0 };
 	int* b = new int[y.size() + 1]{ 0 };
