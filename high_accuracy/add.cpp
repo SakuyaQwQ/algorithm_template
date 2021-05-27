@@ -11,8 +11,6 @@
 #include<set>
 using namespace std;
 
-string dp[1005];
-
 string add(string a, string b) {
 	reverse(begin(a), end(a));
 	reverse(begin(b), end(b));
