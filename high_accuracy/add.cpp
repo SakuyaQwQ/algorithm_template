@@ -1,40 +1,45 @@
-#include<string>
-#include<vector>
 #include<iostream>
 #include<algorithm>
-#include<queue>
-#include<stack>
+#include<vector>
+#include<cmath>
+#include<unordered_map>
+#include<deque>
+#include<map>
 #include<unordered_set>
-
+#include<cstring>
+#include<queue>
+#include<set>
 using namespace std;
 
-string add(string& a, string& b) {
-	string ans;
+string dp[1005];
+
+string add(string a, string b) {
 	reverse(begin(a), end(a));
 	reverse(begin(b), end(b));
+	string res;
 	if (a.size() > b.size())swap(a, b);
 	int left = 0;
 	for (int i = 0; i < a.size(); ++i) {
 		int now = a[i] + b[i] - '0' - '0' + left;
+		res += (now % 10) + '0';
 		left = now / 10;
-		ans += (now % 10) + '0';
 	}
 	for (int i = a.size(); i < b.size(); ++i) {
 		int now = b[i] - '0' + left;
+		res += (now % 10) + '0';
 		left = now / 10;
-		ans += (now % 10) + '0';
 	}
 	if (left) {
-		ans += left + '0';
+		res += left + '0';
 	}
-	reverse(begin(ans), end(ans));
-	while (!ans.empty() && ans[0] == '0')ans.erase(ans.begin());
-	if (ans.empty()) return "0";
-	return ans;
+	reverse(begin(res), end(res));
+	return res;
 }
 
+
 int main() {
-	string a, b;
-	cin >> a >> b;
-	cout << add(a, b) << endl;
+	string m, n;
+	cin >> m >> n;
+	cout << add(m, n) << endl;
 }
+
